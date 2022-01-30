@@ -10,8 +10,8 @@ const findById = async (id: string): Promise<Book | null> =>
 const getAll = async (): Promise<Book[]> => await BookModel.find({});
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const getLimited = async (limit: any): Promise<Book[]> =>
-  await BookModel.find({}).limit(limit);
+const getLimited = async (limit: string): Promise<Book[]> =>
+  await BookModel.find({}).limit(parseInt(limit));
 
 const removeOne = async (id: string): Promise<unknown> =>
   await BookModel.findByIdAndRemove(id);
