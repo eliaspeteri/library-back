@@ -1,6 +1,5 @@
 /** Types */
 import { Book } from '../types';
-
 /** Book (Mongoose) Model */
 import BookModel from '../models/book';
 
@@ -25,6 +24,12 @@ const updateOne = async (
 };
 
 const saveOne = async (book: Book): Promise<string> => {
+  const bookDB = await BookModel.findOne({
+    author: book.author,
+    title: book.title
+  });
+  if (bookDB) return 'Book already exists.';
+
   const newBook = new BookModel({
     ...book,
     whenCreated: new Date()
